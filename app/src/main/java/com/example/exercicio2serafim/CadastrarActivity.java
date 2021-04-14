@@ -1,6 +1,8 @@
 package com.example.exercicio2serafim;
 
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.exercicio2serafim.model.Product;
+import com.example.exercicio2serafim.services.ProductService;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Date;
@@ -16,6 +19,8 @@ public class CadastrarActivity extends AppCompatActivity {
 
     private TextInputEditText tiName, tiDescricao, tiPreco, tiImageUrl, tiStockLevel;
     private Button btCadastrar;
+    private Retrofit retrofit;
+    private ProductService pService;
 
 
     @Override
@@ -60,6 +65,11 @@ public class CadastrarActivity extends AppCompatActivity {
         tiPreco = (TextInputEditText) this.findViewById(R.id.ti_preco);
         tiStockLevel = (TextInputEditText) this.findViewById(R.id.ti_stockLevel);
         btCadastrar = (Button) this.findViewById(R.id.bt_cadastrar);
+        retrofit = new Retrofit.Builder()
+                .baseUrl(getResources().getString(R.string.IP))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        pService =retrofit.create(ProductService.class);
     }
 
 }
