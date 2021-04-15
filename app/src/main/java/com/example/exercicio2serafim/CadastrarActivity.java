@@ -49,7 +49,6 @@ public class CadastrarActivity extends AppCompatActivity {
         product.setStockLevel(Integer.parseInt(this.tiStockLevel.getText().toString()));
         product.setEnabled(true);
         product.setCreationTimestamp("");
-        System.out.println(product);
         pService.cadastrarProduto(product).enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
