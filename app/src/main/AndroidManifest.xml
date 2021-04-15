@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.exercicio2serafim">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Exercicio2Serafim">
-        <activity android:name=".ExcluirActivity"></activity>
+        <activity android:name=".EditarItemActivity"></activity>
+        <activity android:name=".ExcluirActivity" />
         <activity android:name=".EditarActivity" />
         <activity android:name=".BuscarActivity" />
         <activity android:name=".CadastrarActivity" />
@@ -24,5 +22,8 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

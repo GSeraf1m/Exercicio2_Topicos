@@ -1,8 +1,10 @@
 package com.example.exercicio2serafim.model;
 
+import java.io.Serializable;
+
 import androidx.annotation.NonNull;
 
-public class Product {
+public class Product implements Serializable {
     String creationTimestamp;
     String description;
     Boolean enabled;
