@@ -44,7 +44,7 @@ public class CadastrarActivity extends AppCompatActivity {
         Product product = new Product();
         product.setName(this.tiName.getText().toString());
         product.setDescription(this.tiDescricao.getText().toString());
-        product.setPrice((Number) Float.parseFloat(this.tiPreco.getText().toString()));
+        product.setPrice(Float.parseFloat(this.tiPreco.getText().toString()));
         product.setImageUrl(this.tiImageUrl.getText().toString());
         product.setStockLevel(Integer.parseInt(this.tiStockLevel.getText().toString()));
         product.setEnabled(true);

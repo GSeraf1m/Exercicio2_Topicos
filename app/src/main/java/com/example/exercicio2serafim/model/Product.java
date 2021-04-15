@@ -11,13 +11,13 @@ public class Product implements Serializable {
     int id;
     String imageUrl;
     String name;
-    Number price;
+    Float price;
     int stockLevel;
 
     public Product() {
     }
 
-    public Product(String creationTimestamp, String description, Boolean enabled, int id, String imageUrl, String name, Number price, int stockLevel) {
+    public Product(String creationTimestamp, String description, Boolean enabled, int id, String imageUrl, String name, Float price, int stockLevel) {
         this.creationTimestamp = creationTimestamp;
         this.description = description;
         this.enabled = enabled;
@@ -76,11 +76,11 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public Number getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Number price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
