@@ -16,7 +16,8 @@
             android:id="@+id/ti_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="Name"
+            android:text="Harry Potter e a Câmara Secreta" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -28,7 +29,8 @@
             android:id="@+id/ti_descricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Descrição" />
+            android:hint="Descrição"
+            android:text="Livro" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -39,7 +41,8 @@
             android:id="@+id/ti_preco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Preço" />
+            android:hint="Preço"
+            android:text="30.99" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,7 +64,8 @@
             android:id="@+id/ti_stockLevel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Stock Level" />
+            android:hint="Stock Level"
+            android:text="723" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

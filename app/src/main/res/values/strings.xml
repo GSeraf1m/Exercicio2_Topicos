@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Exercicio 2 Serafim</string>
-    <string name="IP">guisfco-online-shopping-api.herokuapp.com/api/online-shopping</string>
+    <string name="IP">https://guisfco-online-shopping-api.herokuapp.com/api/online-shopping/</string>
 </resources>

@@ -1,10 +1,14 @@
 package com.example.exercicio2serafim;
 
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -40,14 +44,30 @@ public class CadastrarActivity extends AppCompatActivity {
         Product product = new Product();
         product.setName(this.tiName.getText().toString());
         product.setDescription(this.tiDescricao.getText().toString());
-        product.setPrice((Number) this.tiPreco.getText());
+        product.setPrice((Number) Float.parseFloat(this.tiPreco.getText().toString()));
         product.setImageUrl(this.tiImageUrl.getText().toString());
         product.setStockLevel(Integer.parseInt(this.tiStockLevel.getText().toString()));
         product.setEnabled(true);
-        product.setCreationTimestamp(new Date().toString());
-        Toast toast = Toast.makeText(getApplicationContext(), "Usuario criado com sucesso", Toast.LENGTH_LONG);
-        toast.show();
-        clean();
+        product.setCreationTimestamp("");
+        System.out.println(product);
+        pService.cadastrarProduto(product).enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if(response.isSuccessful()) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Produto criado com sucesso", Toast.LENGTH_LONG);
+                    toast.show();
+                    clean();
+                }else{
+                    Toast.makeText(CadastrarActivity.this,"Erro no cadastro de produto",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+
+                Toast.makeText(CadastrarActivity.this,"Erro de Conexão",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void clean() {
