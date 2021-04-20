@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.exercicio2serafim.adapter.ProductAdapter;
 import com.example.exercicio2serafim.model.Product;
-import com.example.exercicio2serafim.model.ProductListResponse;
 import com.example.exercicio2serafim.services.ProductService;
 
 import java.util.ArrayList;
@@ -40,11 +39,11 @@ public class BuscarActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         pService = retrofit.create(ProductService.class);
-        pService.listaTodosProdutos().enqueue(new Callback<ProductListResponse>() {
+        pService.listaTodosProdutos().enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<ProductListResponse> call, Response<ProductListResponse> response) {
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                 if(response.isSuccessful()){
-                    pAdapter = new ProductAdapter(BuscarActivity.this, response.body().getProducts());
+                    pAdapter = new ProductAdapter(BuscarActivity.this, response.body());
                     listaProdutos.setAdapter(pAdapter);
                 }else{
                     Toast.makeText(BuscarActivity.this,"Erro no cadastro de produto",Toast.LENGTH_SHORT).show();
@@ -52,7 +51,7 @@ public class BuscarActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ProductListResponse> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
                 Toast.makeText(BuscarActivity.this,"Verifique sua internet",Toast.LENGTH_LONG).show();
             }
         });

@@ -1,8 +1,8 @@
 package com.example.exercicio2serafim.services;
 
 import com.example.exercicio2serafim.model.Product;
-import com.example.exercicio2serafim.model.ProductListResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -19,7 +19,7 @@ public interface ProductService {
     Call<Product> cadastrarProduto(@Body Product product);
 
     @GET("product/")
-    Call<ProductListResponse> listaTodosProdutos();
+    Call<ArrayList<Product>> listaTodosProdutos();
 
     @PUT("product/{id}")
     Call<Product> editarProduto(@Path("id") long id, @Body Product product);

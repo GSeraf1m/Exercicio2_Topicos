@@ -15,10 +15,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.exercicio2serafim.adapter.ProductAdapter;
-import com.example.exercicio2serafim.model.ProductListResponse;
+import com.example.exercicio2serafim.model.Product;
 import com.example.exercicio2serafim.services.ProductService;
 
-public class EditarActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class  EditarActivity extends AppCompatActivity {
 
     private ListView listaProdutos;
     private Retrofit retrofit;
@@ -39,17 +41,17 @@ public class EditarActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         pService = retrofit.create(ProductService.class);
-        pService.listaTodosProdutos().enqueue(new Callback<ProductListResponse>() {
+        pService.listaTodosProdutos().enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<ProductListResponse> call, Response<ProductListResponse> response) {
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                 if(response.isSuccessful()){
-                    pAdapter = new ProductAdapter(EditarActivity.this, response.body().getProducts());
+                    pAdapter = new ProductAdapter(EditarActivity.this, response.body());
                     listaProdutos.setAdapter(pAdapter);
                     listaProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             Intent it = new Intent(EditarActivity.this, EditarItemActivity.class);
-                            it.putExtra("product", response.body().getProducts().get(i));
+                            it.putExtra("product", response.body().get(i));
                             startActivity(it);
                         }
                     });
@@ -59,7 +61,7 @@ public class EditarActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ProductListResponse> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
                 Toast.makeText(EditarActivity.this,"Verifique sua internet",Toast.LENGTH_LONG).show();
             }
         });

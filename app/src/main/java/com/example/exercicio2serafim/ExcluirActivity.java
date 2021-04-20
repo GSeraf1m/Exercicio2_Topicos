@@ -15,8 +15,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.exercicio2serafim.adapter.ProductAdapter;
-import com.example.exercicio2serafim.model.ProductListResponse;
+import com.example.exercicio2serafim.model.Product;
 import com.example.exercicio2serafim.services.ProductService;
+
+import java.util.ArrayList;
 
 public class ExcluirActivity extends AppCompatActivity {
 
@@ -39,16 +41,16 @@ public class ExcluirActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         pService = retrofit.create(ProductService.class);
-        pService.listaTodosProdutos().enqueue(new Callback<ProductListResponse>() {
+        pService.listaTodosProdutos().enqueue(new Callback<ArrayList<Product>>() {
             @Override
-            public void onResponse(Call<ProductListResponse> call, Response<ProductListResponse> response) {
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                 if(response.isSuccessful()){
-                    pAdapter = new ProductAdapter(ExcluirActivity.this, response.body().getProducts());
+                    pAdapter = new ProductAdapter(ExcluirActivity.this, response.body());
                     listaProdutos.setAdapter(pAdapter);
                     listaProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            pService.excluirProduto(response.body().getProducts().get(i).getId()).enqueue(new Callback<Void>() {
+                            pService.excluirProduto(response.body().get(i).getId()).enqueue(new Callback<Void>() {
                                 @Override
                                 public void onResponse(Call<Void> call, Response<Void> response) {
                                     Toast.makeText(ExcluirActivity.this,"Item excluído com sucesso",Toast.LENGTH_LONG).show();
@@ -69,7 +71,7 @@ public class ExcluirActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ProductListResponse> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
                 Toast.makeText(ExcluirActivity.this,"Verifique sua internet",Toast.LENGTH_LONG).show();
             }
         });
